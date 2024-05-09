@@ -9,7 +9,7 @@ from django.contrib.auth.models import (
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None, **extra_fields):
         if not email:
-            raise ValueError("Cette adresse mail est deja utiliser")
+            raise ValueError("Cette adresse mail n'héxiste pas ou est deja utiliser")
 
         email = self.normalize_email(email)
         user = self.model(

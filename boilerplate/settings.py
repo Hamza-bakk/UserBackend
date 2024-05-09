@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +56,7 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
-print(DJOSER["ACTIVATION_URL"].format(uid="exemple_uid", token="exemple_token"))
+print(DJOSER["ACTIVATION_URL"])
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_permissions.IsAuthenticated"),
@@ -71,11 +72,38 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ORS_ALLOWED_ORIGINS = [os.getenv("FRONT_ONE")]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'boilerplate.urls'
@@ -96,14 +124,7 @@ TEMPLATES = [
     },
 ]
 
-JAZZMIN_SETTINGS = {
-    "site_title": "Votre Titre",
-    "site_header": "Votre Header",
-    # "site_logo": "path/to/logo.png",
-    "welcome_sign": "Bienvenue sur le tableau de bord Jazzmin",
-    "show_ui_builder": True,
-    "related_modal_active": True,
-}
+
 
 
 WSGI_APPLICATION = 'boilerplate.wsgi.application'
