@@ -56,7 +56,9 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
-print(DJOSER["ACTIVATION_URL"])
+
+DOMAIN = "localhost:5173/auth/users"
+SITE_NAME = "HB"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_permissions.IsAuthenticated"),
