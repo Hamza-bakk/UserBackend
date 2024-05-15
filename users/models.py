@@ -5,7 +5,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
-
 class UserAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None, **extra_fields):
         if not email:
@@ -15,7 +14,7 @@ class UserAccountManager(BaseUserManager):
         user = self.model(
             email=email, first_name=first_name, last_name=last_name, **extra_fields
         )
-
+        
         user.set_password(password)
         user.save()
 
