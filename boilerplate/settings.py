@@ -25,8 +25,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
-
-
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +41,7 @@ DJOSER = {
     "USER_CREATE_PASSWORD_RETYPE": True,
     "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+
     "SEND_CONFIRMATION_EMAIL": True,
     "SET_USERNAME_RETYPE": True,
     "SET_PASSWORD_RETYPE": True,
@@ -72,18 +72,20 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     'BLACKLIST_AFTER_ROTATION': True,
 
-    # custom
-    "AUTH_COOKIE": "access_token",  # cookie name
+    "AUTH_COOKIE": "access_token",
     'AUTH_COOKIE_DOMAIN': os.getenv("FRONT_ONE"),
-    # "AUTH_COOKIE_SECURE": False,  # restricts the transmission of the cookie to only occur over secure (HTTPS) connections. 
-    "AUTH_COOKIE_HTTP_ONLY": True,  # prevents client-side js from accessing the cookie
-    "AUTH_COOKIE_PATH": "/",  # URL path where cookie will be sent
-    "AUTH_COOKIE_SAMESITE": "Lax",  # specifies whether the cookie should be sent in cross site requests
+
+    "AUTH_COOKIE_HTTP_ONLY": True,
+    "AUTH_COOKIE_PATH": "/",
+    "AUTH_COOKIE_SAMESITE": "Lax",
+    "AUTH_COOKIE_SECURE": False,  # Mettre True si vous utilisez HTTPS
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,6 +102,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [os.getenv("FRONT_ONE")]
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -120,6 +124,8 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
+    "withcredentials", 
+
 ]
 
 ROOT_URLCONF = 'boilerplate.urls'
